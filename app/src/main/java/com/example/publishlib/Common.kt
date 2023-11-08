@@ -1,5 +1,5 @@
 package com.example.publishlib
 
 fun hello() {
-    println("publishlib 0.0.1")
+    println("publishlib 0.0.3")
 }

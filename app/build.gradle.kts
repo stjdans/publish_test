@@ -1,8 +1,9 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("maven-publish")
 }
+
+apply(from = "publish.gradle.kts")
 
 android {
     namespace = "com.example.publishlib"
@@ -40,31 +41,3 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
 
-publishing {
-    repositories {
-        maven {
-            name = "publish-github"
-            url = uri("https://maven.pkg.github.com/stjdans/publish_test")
-            credentials {
-                username = "stjdans"
-                password = "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"
-            }
-        }
-
-        maven {
-            name = "publish-local"
-            url = uri("$buildDir/repo")
-        }
-    }
-
-    publications {
-        register<MavenPublication>("github") {
-            groupId = "${android.namespace}"
-            artifactId = "lib"
-            version = "0.0.1"
-            version = "0.0.1-SNAPSHOT"
-
-            artifact("$buildDir/outputs/aar/app-debug.aar")
-        }
-    }
-}
